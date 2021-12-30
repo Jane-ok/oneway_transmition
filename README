@@ -1,0 +1,8 @@
+One way transmition by udp protocol.
+
+WhistleS -> is UDP-sender service.
+WhistleR -> is UDP-receiver service.
+
+There is another service: udp_buffer_regulator, which will help to avoid udp-packets loss on the UDP-receiver side.
+
+You can run "fakeroot dpkg-deb --build whistleR" or "fakeroot dpkg-deb --build whistleS" to buid .deb packages.

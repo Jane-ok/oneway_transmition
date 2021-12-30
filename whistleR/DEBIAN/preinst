@@ -1,0 +1,13 @@
+#!/bin/bash
+mkdir /var/log/whistleR
+mkdir /var/log/whistleR/chekc_loss
+
+touch /var/log/whistleR/udp_buffer_regulator.log
+touch /var/log/whistleR/whistleR.log
+
+mkdir /etc/whistleR
+mkdir /etc/whistleR/udp_buffer_regulator
+
+mkdir /home/whistleR-data
+mkdir /home/whistleR-data/income
+mkdir /home/whistleR-data/arch

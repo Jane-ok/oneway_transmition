@@ -1,0 +1,8 @@
+#!/bin/bash
+mkdir /var/log/whistleS
+
+mkdir /etc/whistleS
+
+mkdir /home/whistleS-data
+mkdir /home/whistleS-data/outcome
+mkdir /home/whistleS-data/arch

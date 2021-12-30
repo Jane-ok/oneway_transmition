@@ -1,0 +1,7 @@
+Package: whistleS
+Version: 1.0
+Section: misc
+Architecture: all
+Depends: bash, net-tools, logrotate, udpcast
+Maintainer: Jane 
+Description: receiving messages via udp

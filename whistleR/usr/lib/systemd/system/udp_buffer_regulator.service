@@ -1,0 +1,16 @@
+[Unit]
+Description = Regulating udp buffer size
+
+[Service]
+Type=simple
+
+Restart=always
+RestartSec=360
+KillMode=process
+
+ExecStart=/usr/bin/udp_buffer_regulator -D
+
+[Install]
+WantedBy=multi-user.target
+Alias=udp_buffer_regulator.service
+

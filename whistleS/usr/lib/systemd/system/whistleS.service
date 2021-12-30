@@ -1,0 +1,16 @@
+[Unit]
+Description = Udp sender
+
+[Service]
+Type=simple
+
+Restart=always
+RestartSec=15
+KillMode=process
+
+ExecStart=/usr/bin/whistleS.sh -D
+
+[Install]
+WantedBy=multi-user.target
+Alias=whistleS.service
+

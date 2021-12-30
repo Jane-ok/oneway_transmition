@@ -1,0 +1,16 @@
+[Unit]
+Description = Udp receiver
+
+[Service]
+Type=simple
+
+Restart=always
+RestartSec=15
+KillMode=process
+
+ExecStart=/usr/bin/whistleR.sh -D
+
+[Install]
+WantedBy=multi-user.target
+Alias=whistleR.service
+
