@@ -1,7 +1,7 @@
 #!/bin/bash
 BLOCKFILE=/tmp/find_loss_BLOCK
-if [[ ! -e $BLOCKFILE ]];then
-touch $BLOCKFILE
+if [[ ! -e ${BLOCKFILE} ]];then
+touch ${BLOCKFILE}
 
 . /etc/whistleR/whistleR.conf
 
@@ -10,21 +10,21 @@ today=`date +%Y-%m-%d`
 
 check_loss_logdir=$logdir/chekc_loss
 
-if [[ -z $date ]];then
-date=$today
+if [[ -z ${date} ]];then
+date=${today}
 fi
 
-income_log_file=$check_loss_logdir/$date.check_files.log
+income_log_file=${check_loss_logdir}/${date}.check_files.log
 
-IFS=$'\n' read -d '' -r -a array <$income_log_file
+IFS=$'\n' read -d '' -r -a array <${income_log_file}
 	for string in ${array[@]}
         do
-        if [[ ! -e $whistleR_root_dir/income/$string ]]; then
-        echo lost files : $string >> $check_loss_logdir/$date.lost_files.log
+        if [[ ! -e ${whistleR_root_dir}/income/${string} ]]; then
+        echo lost files : ${string} >> ${check_loss_logdir}/${date}.lost_files.log
         else
         continue
 	fi
 	done
 
-rm $BLOCKFILE
+rm ${BLOCKFILE}
 fi
