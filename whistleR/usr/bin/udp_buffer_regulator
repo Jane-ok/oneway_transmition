@@ -22,11 +22,11 @@ then
 fi
 }
 
-chekexist $logfile
+chekexist ${logfile}
 
-if [[ ! -e $BLOCKFILE ]]
+if [[ ! -e ${BLOCKFILE} ]]
 then
-  touch $BLOCKFILE
+  touch ${BLOCKFILE}
   for ((i = 0 ; i < 3 ; i++))
   do
     if [[ ! -e ${current_state_files[$i]} ]];
@@ -37,23 +37,23 @@ then
 #	echo ${cur_vals_of_udp_buf[$i]}
   done
 
-  chekexist $error_count_file
-  [ -s $error_count_file ] || echo 0 > $error_count_file
-  last_count_of_receiving_buf_srr=`cat $error_count_file`
+  chekexist ${error_count_file}
+  [ -s ${error_count_file} ] || echo 0 > ${error_count_file}
+  last_count_of_receiving_buf_srr=`cat ${error_count_file}`
   current_count_of_receiving_buf_srr=`/usr/bin/netstat -su | grep "receive buffer errors" | awk '{print $1}'`
 
-  if [[ $last_count_of_receiving_buf_srr -gt  $current_count_of_receiving_buf_srr ]];
+  if [[ ${last_count_of_receiving_buf_srr} -gt  ${current_count_of_receiving_buf_srr} ]];
   then
-    echo Params of udp_buffer was changed on $today >> $logfile
+    echo Params of udp_buffer was changed on ${today} >> ${logfile}
     for (( i = 0 ; i < 3 ; i ++))
     do
       new_val_rmem_max[$i]=$((${cur_vals_of_udp_buf[$i]}+1024))
       echo ${new_val_rmem_max[$i]} > ${system_udp_buf_params[$i]}
-      echo ${system_udp_buf_params[$i]} from ${cur_vals_of_udp_buf[$i]} to ${new_val_rmem_max[$i]} >> $logfile 
+      echo ${system_udp_buf_params[$i]} from ${cur_vals_of_udp_buf[$i]} to ${new_val_rmem_max[$i]} >> ${logfile}
     done
   else
-    echo there is no errors with udp buffer on $today >> $logfile
+    echo there is no errors with udp buffer on ${today} >> ${logfile}
   fi
-  rm $BLOCKFILE
+  rm ${BLOCKFILE}
 fi
 
