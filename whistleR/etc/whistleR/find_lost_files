@@ -8,7 +8,7 @@ touch ${BLOCKFILE}
 date=$1
 today=`date +%Y-%m-%d`
 
-check_loss_logdir=$logdir/chekc_loss
+check_loss_logdir=${logdir}/chekc_loss
 
 if [[ -z ${date} ]];then
 date=${today}
