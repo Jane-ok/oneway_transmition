@@ -8,14 +8,14 @@ whistleR_logfile=$logdir/whistleR.log
 whistleR_arch=$whistleR_root_dir/arch
 whistleR_Out=$whistleR_root_dir/income
 
-for ((i=$port; i<$port+$port_count*2; i=i+2))
+for ((i=${port}; i<${port}+${port_count}*2; i=i+2))
 do
-  est=$(ps -ef | grep udp | grep "portbase "$i | wc -l )
+  est=$(ps -ef | grep udp | grep "portbase "${i} | wc -l )
   if [ ${est} = "0" ]
   then
-    udp-receiver --file $whistleR_Out/$(date +%Y%m%d_%H%M%S_%N)".tar.bz2" --portbase $i --interface usb0 &
+    udp-receiver --file ${whistleR_Out}/$(date +%Y%m%d_%H%M%S_%N)".tar.bz2" --portbase ${i} --interface usb0 &
   else
-    echo portbase $i already started
+    echo portbase ${i} already started
   fi
 done
 
