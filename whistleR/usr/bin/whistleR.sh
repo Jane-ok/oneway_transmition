@@ -27,7 +27,7 @@ do
     echo ${files} was received at `date +%Y-%m-%d---%T` >> ${whistleR_logfile}
     tar --touch -C ${whistleR_Out}/ -xvf ${whistleR_Out}/${files} 2>> ${whistleR_logfile}
 
-    if [[ "${files}" =~ check_files.log$ ]];
+    if [[ "${files}" =~ check_files.log$ ]]
     then
       mv -f ${whistleR_Out}/${files} ${logdir}/chekc_loss/
     fi
