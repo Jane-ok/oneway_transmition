@@ -6,3 +6,85 @@ WhistleR -> is UDP-receiver service.
 There is another service: udp_buffer_regulator, which will help to avoid udp-packets loss on the UDP-receiver side.
 
 You can run "fakeroot dpkg-deb --build whistleR" or "fakeroot dpkg-deb --build whistleS" to buid .deb packages.
+
+*********Configuration*********
+
+Sender:
+ 1. dpkg -i whistleS.deb
+ 2. Incert into /etc/sysctl.conf next lines:  net.core.rmem_default=32777216
+                                              net.core.rmem.max=32777216
+                                              net.core.wmem_default=32777216
+                                              net.core.wmem_default=32777216
+
+3. Chouse network interface for WhistleS service, and set next settings:
+   *change interface name in next file: /etc/udev/rules.d/70-persistent-net.rules
+    
+    SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="00:00:00:00:00:00", NAME="usb0"
+    
+    * set ip address for that interface in /etc/network/interfaces
+    
+    allow-hotplugin usb0
+    iface usb0 inet static
+    address 1.1.1.1
+    netmask 255.255.255.252
+
+4. Enable whistleS.service
+   
+   systemctl enable whistleS.service
+   
+5. Run whistleS.service
+
+   systemctl start whistleS.service
+
+6. Reboot the host.
+
+
+Receiver:
+1. dpkg -i whistleR.deb
+2. Incert into /etc/sysctl.conf next lines:  net.core.rmem_default=32777216
+                                             net.core.rmem.max=32777216
+                                             net.core.wmem_default=32777216
+                                             net.core.wmem_default=32777216
+                                              
+3. Chouse network interface for WhistleR service, and set next settings:
+   *change interface name in next file: /etc/udev/rules.d/70-persistent-net.rules
+    
+    SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="00:00:00:00:00:00", NAME="usb0"
+    
+    * set ip address for that interface in /etc/network/interfaces
+    
+    allow-hotplugin usb0
+    iface usb0 inet static
+    address 1.1.1.2
+    netmask 255.255.255.252                                     
+
+4. Enable whistleR.service
+   
+   systemctl enable whistleR.service
+   
+5. Run whistleR.service
+
+   systemctl start whistleR.service
+
+6. Reboot the host.
+
+/home/whistleS-data/outcome - directory for outgoing files on WhistleS (sender) host.
+/home/whistleR-data/income - directory for ingoing files on WhistleR (receiver) host.
+
+You can find logs in /var/log/whistleS or /var/log/whistleR dirs.
+logrotate .conf files are in /etc/logrotate.d/ : whistleR.conf
+                                                whistleS.conf
+                                                
+.conf files of that services are in there root dirs: /etc/whistleR/whistleR.conf and /etc/whistleS/whistleS.conf.
+
+***/etc/whistleS/whistleS.conf
+
+whistleS_root_dir=/home/whistleS-data
+logdir=/var/log/whistleS
+port_dir=/etc/whistleS
+
+***/etc/whistleS/whistleR.conf
+
+whistleR_root_dir=/home/whistleR-data
+logdir=/var/log/whistleR
+port_dir=/etc/whistleR
