@@ -12,9 +12,9 @@ You can run "fakeroot dpkg-deb --build whistleR" or "fakeroot dpkg-deb --build w
 Sender:
  1. dpkg -i whistleS.deb
  2. Incert into /etc/sysctl.conf next lines:  net.core.rmem_default=32777216
-                                              net.core.rmem.max=32777216
+                                              net.core.rmem_max=32777216
                                               net.core.wmem_default=32777216
-                                              net.core.wmem_default=32777216
+                                              net.core.wmem_max=32777216
 
 3. Chouse network interface for WhistleS service, and set next settings:
    *change interface name in next file: /etc/udev/rules.d/70-persistent-net.rules
@@ -42,9 +42,9 @@ Sender:
 Receiver:
 1. dpkg -i whistleR.deb
 2. Incert into /etc/sysctl.conf next lines:  net.core.rmem_default=32777216
-                                             net.core.rmem.max=32777216
+                                             net.core.rmem_max=32777216
                                              net.core.wmem_default=32777216
-                                             net.core.wmem_default=32777216
+                                             net.core.wmem_max=32777216
                                               
 3. Chouse network interface for WhistleR service, and set next settings:
    *change interface name in next file: /etc/udev/rules.d/70-persistent-net.rules
@@ -73,7 +73,7 @@ Receiver:
 
 You can find logs in /var/log/whistleS or /var/log/whistleR dirs.
 logrotate .conf files are in /etc/logrotate.d/ : whistleR.conf
-                                                whistleS.conf
+                                                 whistleS.conf
                                                 
 .conf files of that services are in there root dirs: /etc/whistleR/whistleR.conf and /etc/whistleS/whistleS.conf.
 
@@ -87,4 +87,3 @@ port_dir=/etc/whistleS
 
 whistleR_root_dir=/home/whistleR-data
 logdir=/var/log/whistleR
-port_dir=/etc/whistleR
