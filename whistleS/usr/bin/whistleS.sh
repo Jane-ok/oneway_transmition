@@ -26,7 +26,7 @@ then
     then
       tar -cf ${whistleS_root_dir}/outcome/${files}".tar" --directory=${whistleS_root_dir}/outcome/ ${files}
 #     udp-sender --file /home/user/in/*.tar --interface usb0 --max-bitrate 100m --async  --portbase ${cur_port} --autostart 1
-      udp-sender --file ${whistleS_root_dir}/outcome/${files}".tar" --interface usb0 --max-bitrate 10m --fec 8x8 --async --portbase ${cur_port} --autostart 1
+      udp-sender --file ${whistleS_root_dir}/outcome/${files}".tar" --interface usb0 --max-bitrate 10m --fec 16x16/128 --async --portbase ${cur_port} --autostart 1
       echo ${files} arch sent to ${cur_port} at `date +%Y-%m-%d---%T` >> ${logdir}/whistleS.log
       rm ${whistleS_root_dir}/outcome/${files}".tar"
       mv -f ${whistleS_root_dir}/outcome/${files} ${whistleS_root_dir}/outcome/
